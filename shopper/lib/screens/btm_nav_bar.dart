@@ -1,5 +1,8 @@
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:shopper/screens/home.dart';
+
+import '../widgets/cart_icon.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -17,9 +20,7 @@ class _DefaultHomePageState extends State<BottomNavBar> {
   }
 
   final List<Widget> _pages = [
-    Container(
-      color: Colors.green,
-    ),
+    const Home(),
     Container(
       color: Colors.red,
     ),
@@ -58,7 +59,7 @@ class _DefaultHomePageState extends State<BottomNavBar> {
               backgroundColor: Color(0xff40c4ff)),
           BottomNavigationBarItem(
             //icon: ShoppingCartIcon(),
-            icon: Icon(CarbonIcons.shopping_cart),
+            icon: ShoppingCartIcon(),
             label: 'Cart',
             backgroundColor: Color(0xff40c4ff),
           ),

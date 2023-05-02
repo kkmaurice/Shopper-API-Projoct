@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   carbon_icons: ^0.0.1+2
+  ionicons: ^0.2.2
+  badges: ^3.1.1
 
 dev_dependencies:
   flutter_test:
