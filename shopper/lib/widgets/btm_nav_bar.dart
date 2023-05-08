@@ -2,7 +2,7 @@ import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:shopper/screens/home.dart';
 
-import '../widgets/cart_icon.dart';
+import 'cart_icon.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -53,9 +53,9 @@ class _DefaultHomePageState extends State<BottomNavBar> {
           ),
           BottomNavigationBarItem(
               icon: Icon(
-                CarbonIcons.search,
+                CarbonIcons.categories,
               ),
-              label: 'Search',
+              label: 'Categories',
               backgroundColor: Color(0xff40c4ff)),
           BottomNavigationBarItem(
             //icon: ShoppingCartIcon(),

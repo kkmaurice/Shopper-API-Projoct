@@ -1,25 +1,86 @@
+// ignore_for_file: sized_box_for_whitespace, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
+import 'package:shopper/helpers/route_helper.dart';
+import 'package:shopper/widgets/loader.dart';
 import 'package:shopper/widgets/search_bar_widget.dart';
+
+import '../providers/product_provider.dart';
+import '../widgets/product_tile.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<ProductProvider>();
+    final provider2 = context.read<ProductProvider>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shopper'),
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            buildSearchBar(context)
-            ]
-            )
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('Shopper'),
+        ),
+        body: provider.products.isNotEmpty
+            ? Column(children: [
+                buildSearchBar(context),
+                const SizedBox(height: 10),
+                // category section
+                Container(
+                  height: 50,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: provider.categories.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        child: Chip(
+                          backgroundColor: Colors.red,
+                          label: Text(provider.categories[index]),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                //const SizedBox(height: 10),
+                InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/all-products',
+                      );
+                    },
+                    child: const Align(
+                        alignment: Alignment.topRight,
+                        child: Chip(label: Text('View All Products')))),
+                
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: provider.products.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.7,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          itemBuilder: (context, index) {
+                            return ChangeNotifierProvider.value(
+                                value: provider.products[index],
+                                child: const productTile());
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ])
+            : const CustomLoader(loaderInfo: 'Loading Products'));
   }
 }
