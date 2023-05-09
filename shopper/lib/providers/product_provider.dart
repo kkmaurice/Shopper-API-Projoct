@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, unnecessary_type_check
+// ignore_for_file: prefer_final_fields, unnecessary_type_check, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'package:shopper/models/product_model.dart';
@@ -18,6 +18,11 @@ class ProductProvider with ChangeNotifier {
   List<String> _categories = [];
   List<String> get categories => _categories;
   String get errorMessage => _errorMessage;
+
+  // get product by id
+  Product getProductById(int id) {
+    return _products.firstWhere((prod) => prod.id == id);
+  }
 
   // fetch products
   Future<List<Product>> fetchProducts() async {
