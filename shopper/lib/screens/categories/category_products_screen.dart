@@ -37,6 +37,7 @@ class _FeedsScreenState extends State<CategoryScreenProducts> {
     final prod = context.watch<ProductProvider>();
     final catProducts = prod.getProductsByCategory(catName);
 
+
     //final product = context.watch<Product>();
 
     return Scaffold(
