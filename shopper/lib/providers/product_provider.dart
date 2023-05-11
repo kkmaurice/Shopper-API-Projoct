@@ -13,10 +13,12 @@ class ProductProvider with ChangeNotifier {
 
   List<Product> _products = [];
   List<Product> get products => _products;
+  List<Product> _searchList = [];
   String _errorMessage = '';
 
   List<String> _categories = [];
   List<String> get categories => _categories;
+  List<Product> get searchList => _searchList;
   String get errorMessage => _errorMessage;
 
   // get product by id
@@ -49,5 +51,28 @@ class ProductProvider with ChangeNotifier {
     } else {
       throw Exception('Failed to load categories');
     }
+  }
+
+  // get products by category
+  Future<List<Product>> getProductsByCategory(String category) async {
+    final data = await DataRepository().fetchProductsByCategory(category);
+    if (data is List<Product>) {
+      _products = data;
+      notifyListeners();
+      return _products;
+    } else {
+      throw Exception('Failed to load products');
+    }
+    
+  }
+
+  // search products
+  List<Product> searchProducts(String query) {
+    _searchList = _products
+        .where((prod) =>
+            prod.title!.toLowerCase().contains(query.toLowerCase()) ||
+            prod.description!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    return _searchList;
   }
 }

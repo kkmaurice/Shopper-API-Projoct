@@ -1,7 +1,8 @@
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:shopper/screens/home.dart';
+import 'package:shopper/screens/home/home.dart';
 
+import '../screens/categories/categories.dart';
 import 'cart_icon.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -21,9 +22,7 @@ class _DefaultHomePageState extends State<BottomNavBar> {
 
   final List<Widget> _pages = [
     const Home(),
-    Container(
-      color: Colors.red,
-    ),
+    const CategoryScreen(),
     Container(
       color: Colors.amber,
     ),

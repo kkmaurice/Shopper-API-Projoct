@@ -6,8 +6,8 @@ import 'package:shopper/widgets/cart_icon.dart';
 import 'package:shopper/widgets/loader.dart';
 import 'package:shopper/widgets/search_bar_widget.dart';
 
-import '../providers/product_provider.dart';
-import '../widgets/product_tile.dart';
+import '../../providers/product_provider.dart';
+import '../../widgets/product_tile.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10, top: 10),
           child: Text(
             'Categories',
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
         const SizedBox(height: 10),

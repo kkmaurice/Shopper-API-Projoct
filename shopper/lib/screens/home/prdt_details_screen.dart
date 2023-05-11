@@ -6,7 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shopper/models/product_model.dart';
 import 'package:shopper/widgets/cart_icon.dart';
 
-import '../providers/product_provider.dart';
+import '../../providers/product_provider.dart';
 
 class ProductDetail extends StatelessWidget {
   const ProductDetail({super.key});

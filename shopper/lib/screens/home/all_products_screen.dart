@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/product_provider.dart';
-import '../widgets/product_tile.dart';
+import '../../providers/product_provider.dart';
+import '../../widgets/product_tile.dart';
 
 class AllProductsScreen extends StatelessWidget {
   const AllProductsScreen({super.key});
