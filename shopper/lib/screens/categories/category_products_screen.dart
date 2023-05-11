@@ -34,6 +34,8 @@ class _FeedsScreenState extends State<CategoryScreenProducts> {
 
     String catName = ModalRoute.of(context)!.settings.arguments as String;
 
+
+
     final prod = context.watch<ProductProvider>();
     final catProducts = prod.getProductsByCategory(catName);
 
