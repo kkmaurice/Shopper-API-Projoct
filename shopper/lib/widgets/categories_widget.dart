@@ -15,7 +15,7 @@ class CategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed('/category-products-screen', arguments: catText);
@@ -27,8 +27,8 @@ class CategoriesWidget extends StatelessWidget {
             border: Border.all(color: Colors.red.withOpacity(0.7), width: 2)),
         child: Container(
           alignment: Alignment.center,
-          height: _screenSize.height * 0.2,
-          width: _screenSize.width * 0.3,
+          height: screenSize.height * 0.2,
+          width: screenSize.width * 0.3,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16), color: color),
           child: TextWidget(

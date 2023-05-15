@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopper/widgets/cart_icon.dart';
 import 'package:shopper/widgets/loader.dart';
 
+import '../../providers/dark_theme_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/product_tile.dart';
 import '../../widgets/text_widget.dart';
@@ -30,22 +31,21 @@ class _FeedsScreenState extends State<CategoryScreenProducts> {
   @override
   Widget build(BuildContext context) {
     // final Color color = Utils(context: context).color;
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
 
     String catName = ModalRoute.of(context)!.settings.arguments as String;
-
-
 
     final prod = context.watch<ProductProvider>();
     final catProducts = prod.getProductsByCategory(catName);
 
-
-    //final product = context.watch<Product>();
+    Color theme = context.watch<DarkThemeProvider>().darkTheme
+        ? Colors.white
+        : Colors.black;
 
     return Scaffold(
         appBar: AppBar(
           title: TextWidget(
-              text: catName, color: Colors.black, textSize: 22, isTitle: true),
+              text: catName, color: theme, textSize: 22, isTitle: true),
           actions: const [
             ShoppingCartIcon(),
           ],
@@ -124,6 +124,10 @@ class _FeedsScreenState extends State<CategoryScreenProducts> {
                   borderSide:
                       const BorderSide(color: Colors.greenAccent, width: 1)),
               hintText: 'What\'s in your mind',
+              hintStyle: TextStyle(
+                  color: _searchTextFocusNode.hasFocus
+                      ? Colors.greenAccent
+                      : Colors.grey),
               prefixIcon: const Icon(Icons.search),
               suffix: IconButton(
                   onPressed: (() {

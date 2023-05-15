@@ -9,17 +9,28 @@ class ProductProvider with ChangeNotifier {
   ProductProvider() {
     fetchProducts();
     fetchCategories();
+    //getProductsByCategory(selectedCategoryIndex);
   }
 
   List<Product> _products = [];
   List<Product> get products => _products;
   List<Product> _searchList = [];
+  //List<Product> _productsByCategory = [];
   String _errorMessage = '';
+  String _selectedCategoryIndex = '';
 
   List<String> _categories = [];
   List<String> get categories => _categories;
+  //List<Product> get productsByCategory => _productsByCategory;
   List<Product> get searchList => _searchList;
   String get errorMessage => _errorMessage;
+  String get selectedCategoryIndex => _selectedCategoryIndex;
+
+  // set selected category index
+  void setSelectedCategory(String category) {
+    _selectedCategoryIndex = category;
+    notifyListeners();
+  }
 
   // get product by id
   Product getProductById(int id) {
@@ -57,13 +68,13 @@ class ProductProvider with ChangeNotifier {
   Future<List<Product>> getProductsByCategory(String category) async {
     final data = await DataRepository().fetchProductsByCategory(category);
     if (data is List<Product>) {
+      //_products = data;
       _products = data;
       notifyListeners();
       return _products;
     } else {
       throw Exception('Failed to load products');
     }
-    
   }
 
   // search products

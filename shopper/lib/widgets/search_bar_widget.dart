@@ -5,7 +5,7 @@ Widget buildSearchBar(BuildContext context) {
   // final searchProvider = Provider.of<SearchProvider>(context);
 
   return Padding(
-    padding: EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(8.0),
     child: TextField(
       onEditingComplete: () {
         // Navigator.of(context).push(

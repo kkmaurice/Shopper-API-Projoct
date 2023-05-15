@@ -1,9 +1,11 @@
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:shopper/screens/home/home.dart';
+import 'package:shopper/screens/settings/settings.dart';
 
+import '../screens/cart/cart_screen.dart';
 import '../screens/categories/categories.dart';
-import 'cart_icon.dart';
+import 'package:badges/badges.dart' as badges;
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -23,12 +25,8 @@ class _DefaultHomePageState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     const Home(),
     const CategoryScreen(),
-    Container(
-      color: Colors.amber,
-    ),
-    Container(
-      color: Colors.indigo,
-    )
+    const Cart(),
+    const Settings()
   ];
 
   @override
@@ -40,33 +38,60 @@ class _DefaultHomePageState extends State<BottomNavBar> {
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type: BottomNavigationBarType.fixed,
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
         selectedItemColor: Colors.indigo,
         unselectedItemColor: Colors.blue,
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(
               CarbonIcons.home,
             ),
             label: 'Home',
             backgroundColor: Color(0xff40c4ff),
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 CarbonIcons.categories,
               ),
               label: 'Categories',
               backgroundColor: Color(0xff40c4ff)),
           BottomNavigationBarItem(
-            //icon: ShoppingCartIcon(),
-            icon: ShoppingCartIcon(),
+            // icon: Icon(
+            //   CarbonIcons.shopping_cart,
+            // ),
+            icon: badges.Badge(
+              badgeStyle: badges.BadgeStyle(
+                padding: const EdgeInsets.all(5),
+                borderRadius: BorderRadius.circular(10),
+                badgeColor: Colors.redAccent,
+                elevation: 1,
+              ),
+              //elevation: 1,
+              //badgeColor: kBrandAccent,
+              showBadge: true,
+              //showBadge: cartProvider.cartItems.isNotEmpty,
+              badgeContent: Text(
+                //cartProvider.cartItems.length.toString(),
+                2.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              child: const Icon(
+                CarbonIcons.shopping_cart,
+              ),
+            ),
             label: 'Cart',
             backgroundColor: Color(0xff40c4ff),
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
-              CarbonIcons.user,
+              CarbonIcons.settings,
             ),
-            label: 'Profile',
+            label: 'Settings',
             backgroundColor: Color(
               0xff40c4ff,
             ),

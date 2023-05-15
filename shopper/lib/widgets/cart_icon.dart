@@ -33,7 +33,7 @@ class ShoppingCartIcon extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        child: Icon(
+        child: const Icon(
           Icons.shopping_cart_outlined,
         ),
       ),
