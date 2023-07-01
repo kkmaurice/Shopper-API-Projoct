@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:shopper/providers/cart_provider.dart';
 
 import '../models/product_model.dart';
 
@@ -16,6 +17,7 @@ class productTile extends StatelessWidget {
   });
 
   //final ProductProvider provider;
+  //final bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +98,50 @@ class productTile extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            Text(
-              'Shs ${prod.price}',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Text(
+                  'Shs ${prod.price}',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                
+                   ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 104, 170, 98),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            elevation: 0),
+                        onPressed: () {
+                          //print('Add to cart');
+                          context.read<CartProvider>().addToCart(prod);
+                          print('${prod.title} added to cart');
+                        },
+                        child: const Icon(
+                          Ionicons.add,
+                          size: 25,
+                        ))
+
+                // Container(
+                //     decoration: BoxDecoration(
+                //       color: const Color.fromARGB(255, 104, 170, 98),
+                //       borderRadius: BorderRadius.circular(5),
+                //     ),
+                //     child: IconButton(
+                //       onPressed: () {
+                //         print('Add to cart');
+                //       },
+                //       icon: const Icon(
+                //         Ionicons.add,
+                //         size: 20,
+                //       ),
+                //     ))
+              ],
             ),
             const SizedBox(height: 10),
           ],

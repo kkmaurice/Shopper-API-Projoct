@@ -32,6 +32,7 @@ class Styles {
               background: isDarkTheme ? Colors.black : const Color(0xffF1F5FB)),
       textSelectionTheme: TextSelectionThemeData(
           selectionColor: isDarkTheme ? Colors.white : Colors.black),
+          
     );
   }
 }

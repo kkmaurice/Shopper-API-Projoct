@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:shopper/models/product_model.dart';
 import 'package:shopper/utils/app_constants.dart';
 
+import '../models/cart_models.dart';
+
 class DataRepository {
   // create an instance of dio
   final Dio _dio = Dio();
@@ -39,6 +41,46 @@ class DataRepository {
       final categoryProducts =
           products.where((element) => element.category == category).toList();
       return categoryProducts;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // post to cart
+  Future<void> postToCart(Cart cartItem) async {
+    try {
+      await _dio.post(AppConstants.cartUrl, data: cartItem.toJson());
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // get cart items
+  Future<List<Cart>> getCartItems() async {
+    try {
+      final response = await _dio.get(AppConstants.cartUrl);
+      final data = response.data as List;
+      final cartItems = data.map((e) => Cart.fromJson(e)).toList();
+
+      return cartItems;
+    } catch (e) {
+    throw Exception(e);
+    }
+  }
+
+  // delete cart item
+  Future<void> deleteCartItem(int id) async {
+    try {
+      await _dio.delete('${AppConstants.cartUrl}/$id');
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // delete all cart items
+  Future<void> deleteAllCartItems() async {
+    try {
+      await _dio.delete(AppConstants.cartUrl);
     } catch (e) {
       throw Exception(e);
     }

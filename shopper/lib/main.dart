@@ -6,6 +6,8 @@ import 'package:shopper/providers/dark_theme_provider.dart';
 import 'package:shopper/providers/product_provider.dart';
 import 'package:shopper/widgets/btm_nav_bar.dart';
 
+import 'providers/cart_provider.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -38,6 +40,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => themeChangeProvider),
       ],
       child: Consumer<DarkThemeProvider>(
